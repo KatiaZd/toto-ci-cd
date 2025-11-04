@@ -1,16 +1,16 @@
 pipeline {
-  agent any
-  stages {
-    stage('Checkout') {
-      steps {
-        // Jenkins checkoute déjà via SCM, mais on garde un écho pour la trace
-        echo "📦 Sources récupérées depuis GitHub"
-      }
+    agent {
+        label "$NODE"
     }
-    stage('Hello World') {
-      steps {
-        echo "✅ Hello from Jenkins!"
-      }
+    tools {
+        nodejs "NODE22"
     }
-  }
+    stages {
+       stage("Build presentation") {
+            steps{
+                sh('node -v')
+                sh('npm -v')
+            }
+        }
+    }
 }
